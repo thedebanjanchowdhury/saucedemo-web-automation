@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="C:/PROJECTS/LEARNING JARGONS/Java/saucedemo-automation">
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="verifyLoginTest"/>
+                    <include name="verifyNegativeTestCases"/>
+                    <include name="verifyValidationTestCases"/>
+                    <include name="verifyErrorDialogClose"/>
+                    <include name="verifyDirectURLAccess"/>
+                    <include name="verifyDirectURLAccess2"/>
+                </methods>
+            </class>
+
+            <class name="tests.InventoryTest">
+                <methods>
+                    <include name="verifyPageLoad"/>
+                    <include name="verifyAscendingSort"/>
+                    <include name="verifyDescendingSort"/>
+                    <include name="verifyPriceAscendingSort"/>
+                    <include name="verifyPriceDescendingSort"/>
+                    <include name="verifyProductAddToCart"/>
+                    <include name="verifyProductNavigation"/>
+                </methods>
+            </class>
+
+            <class name="tests.CartTests">
+                <methods>
+                    <include name="verifySuccessfulPageLoad" />
+                    <include name="verifyAddMultipleItems" />
+                    <include name="verifyRemoveItem" />
+                    <include name="verifyRemoveItems" />
+                    <include name="verifyCheckoutNavigation" />
+                </methods>
+            </class>
+
+            <class name="tests.CheckoutOneTest">
+                <methods>
+                    <include name="verifyPageLoad" />
+                    <include name="verifyFormValidation" />
+                    <include name="verifyErrorDialogClose" />
+                    <include name="verifyCancelCheckoutNavigation" />
+                    <include name="verifyProceedCheckoutNavigation" />
+                </methods>
+            </class>
+
+            <class name="tests.CheckoutTwoTest">
+                <methods>
+                    <include name="verifyPageLoad" />
+                    <include name="verifyCorrectProductsInCart" />
+                    <include name="verifyCorrectTaxAmountCalculations" />
+                    <include name="verifyCartSubtotalCalculations" />
+                    <include name="verifyCartTotalCalculations" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
