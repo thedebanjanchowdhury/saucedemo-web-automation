@@ -24,7 +24,7 @@ public class CheckoutTwoTest extends BaseTest {
         loginPage = new LoginPage(driver);
     }
 
-    @BeforeMethod
+    @BeforeMethod(onlyForGroups = {"requiresLogin"})
     public void beforeMethod() {
         loginPage.login("standard_user", "secret_sauce");
         InventoryPage inventoryPage = new InventoryPage(driver);
@@ -35,7 +35,7 @@ public class CheckoutTwoTest extends BaseTest {
         checkoutOnePage.submitForm("Debanjan", "Chowdhury", "700001");
     }
 
-    @Test(description = "Verify page load")
+    @Test(description = "Verify page load", groups = {"requiresLogin"})
     public void verifyPageLoad() {
         CheckoutTwoPage checkoutTwoPage = new CheckoutTwoPage(driver);
         Assert.assertTrue(checkoutTwoPage.isPageLoaded(),
@@ -82,6 +82,11 @@ public class CheckoutTwoTest extends BaseTest {
 
         double totalAmount = subtotalPrice + calculatedTax;
         Assert.assertEquals(totalAmount, checkoutTwoPage.getTotalPrice(), "Total amount mismatch");
+    }
+
+    @Test(description = "Verify prevention of direct url access")
+    public void verifyDirectUrlAccess() {
+        driver.get(CHECKOUT_TWO_PAGE_URL);
     }
 
 }

@@ -1,0 +1,1 @@
+{"uuid":"b1db2c83-bb32-406e-b641-c63300509e4e","name":"base.BaseTest.resetApp","children":["c0d9e996-6f82-4c1a-814f-0ffca444233d"],"description":"","befores":[],"afters":[{"name":"resetApp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1771817114913,"stop":1771817115076}],"start":1771817114913,"stop":1771817115077}
