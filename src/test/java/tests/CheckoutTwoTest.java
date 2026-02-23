@@ -42,7 +42,7 @@ public class CheckoutTwoTest extends BaseTest {
                 "Page not loaded");
     }
 
-    @Test(description = "Verify correct products in cart")
+    @Test(description = "Verify correct products in cart", groups = {"requiresLogin"})
     public void verifyCorrectProductsInCart() {
         CheckoutTwoPage checkoutTwoPage = new CheckoutTwoPage(driver);
         List<String> productNames = checkoutTwoPage.getProductNames();
@@ -50,20 +50,19 @@ public class CheckoutTwoTest extends BaseTest {
                 "Mismatch in product names");
     }
 
-    @Test(description = "Verify correct tax amount calculation")
+    @Test(description = "Verify correct tax amount calculation", groups = {"requiresLogin"})
     public void verifyCorrectTaxAmountCalculations() {
-
         CheckoutTwoPage checkoutTwoPage = new CheckoutTwoPage(driver);
         List<Double> productPrices = checkoutTwoPage.getProductPrices();
         double totalPrice = productPrices.stream().mapToDouble(Double::doubleValue).sum();
         DoubleUnaryOperator calculateTax = total -> total * taxRate;
         double calculatedTax = calculateTax.applyAsDouble(totalPrice);
 
-        double roundedTax = Math.ceil(calculatedTax*10) / 10;
+        double roundedTax = Math.ceil(calculatedTax * 100.0) / 100.0;
         Assert.assertEquals(checkoutTwoPage.getTaxPrice(), roundedTax, "Tax price mismatch");
     }
 
-    @Test(description = "Verify correct cart subtotal calculation")
+    @Test(description = "Verify correct cart subtotal calculation", groups = {"requiresLogin"})
     public void verifyCartSubtotalCalculations() {
         CheckoutTwoPage checkoutTwoPage = new CheckoutTwoPage(driver);
         List<Double> productPrice = checkoutTwoPage.getProductPrices();
@@ -71,14 +70,14 @@ public class CheckoutTwoTest extends BaseTest {
         Assert.assertEquals(checkoutTwoPage.getSubtotalPrice(), totalPrice, "Subtotal price mismatch");
     }
 
-    @Test(description = "Verify correct cart total calculation")
+    @Test(description = "Verify correct cart total calculation", groups = {"requiresLogin"})
     public void verifyCartTotalCalculations() {
         CheckoutTwoPage checkoutTwoPage = new CheckoutTwoPage(driver);
         List<Double> productPrice = checkoutTwoPage.getProductPrices();
         double subtotalPrice = productPrice.stream().mapToDouble(Double::doubleValue).sum();
         DoubleUnaryOperator calculateTax = total -> total * taxRate;
         double calculatedTax = calculateTax.applyAsDouble(subtotalPrice);
-        calculatedTax = Math.ceil(calculatedTax*10) / 10;
+        calculatedTax = Math.ceil(calculatedTax * 10) / 10;
 
         double totalAmount = subtotalPrice + calculatedTax;
         Assert.assertEquals(totalAmount, checkoutTwoPage.getTotalPrice(), "Total amount mismatch");

@@ -3,12 +3,16 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class CheckoutTwoPage {
     private final WebDriver driver;
+    private final WebDriverWait wait;
 
     // Product Details
     private static final By cartList = By.className("cart-list");
@@ -28,6 +32,7 @@ public class CheckoutTwoPage {
 
     public CheckoutTwoPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public boolean isPageLoaded() {
@@ -50,22 +55,23 @@ public class CheckoutTwoPage {
     }
 
     public Double getTaxPrice() {
-        return Double.parseDouble(driver.findElement(taxPrice).getText().replace("Tax: $", ""));
+        return Double.parseDouble(
+                wait.until(ExpectedConditions.visibilityOfElementLocated(taxPrice)).getText().replace("Tax: $", ""));
     }
 
     public Double getSubtotalPrice() {
         return Double.parseDouble(
-          driver.findElement(subtotalPrice).getText().replace("Item total: $", "")
+          wait.until(ExpectedConditions.visibilityOfElementLocated(subtotalPrice)).getText().replace("Item total: $", "")
         );
     }
 
     public Double getTotalPrice() {
         return Double.parseDouble(
-                driver.findElement(totalPrice).getText().replace("Total: $", "")
+                wait.until(ExpectedConditions.visibilityOfElementLocated(totalPrice)).getText().replace("Total: $", "")
         );
     }
 
     public String getLabelPrice() {
-        return driver.findElement(productPrice).getText();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(productPrice)).getText();
     }
 }
