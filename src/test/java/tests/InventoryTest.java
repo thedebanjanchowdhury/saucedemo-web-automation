@@ -1,6 +1,9 @@
 package tests;
 
 import base.BaseTest;
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -26,13 +29,18 @@ public class InventoryTest extends BaseTest {
         loginPage.login("standard_user", "secret_sauce");
     }
 
-    @Test(description = "Verify page loads successfully")
+    @Test
+    @Description("Verify page loads successfully")
+    @Severity(SeverityLevel.CRITICAL)
     public void verifyPageLoaded() {
         InventoryPage inventory = new InventoryPage(driver);
         Assert.assertTrue(inventory.isPageLoaded());
     }
 
-    @Test(description = "Verify ascending sort of product names")
+
+    @Test
+    @Description("Verify ascending sort of product names")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyAscendingSort() {
         InventoryPage inventory = new InventoryPage(driver);
         inventory.selectSortOption("az");
@@ -44,7 +52,9 @@ public class InventoryTest extends BaseTest {
         Assert.assertEquals(sortedList, actialList, "Mismatch in ascending sort function");
     }
 
-    @Test(description = "Verify descending sort of product names")
+    @Test
+    @Description("Verify descending sort of product names")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyDescendingSort() {
         InventoryPage inventory = new InventoryPage(driver);
         inventory.selectSortOption("za");
@@ -57,7 +67,9 @@ public class InventoryTest extends BaseTest {
         Assert.assertEquals(sortedList, actialList, "Mismatch in descending sort function");
     }
 
-    @Test(description = "Verify ascending sort of product price")
+    @Test
+    @Description("Verify ascending sort of product price")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyPriceAscendingSort() {
         InventoryPage inventory = new InventoryPage(driver);
         inventory.selectSortOption("lohi");
@@ -67,7 +79,9 @@ public class InventoryTest extends BaseTest {
         Assert.assertEquals(sortedList, actialList, "Mismatch in ascending price sort function");
     }
 
-    @Test(description = "Verify descending sort of product price")
+    @Test
+    @Description("Verify descending sort of product price")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyPriceDescendingSort() {
         InventoryPage inventory = new InventoryPage(driver);
         inventory.selectSortOption("hilo");
@@ -78,7 +92,9 @@ public class InventoryTest extends BaseTest {
         Assert.assertEquals(actualList, sortedList, "Mismatch in descending price sort function");
     }
 
-    @Test(description = "Verify product add to cart")
+    @Test
+    @Description("Verify product add to cart")
+    @Severity(SeverityLevel.CRITICAL)
     public void verifyProductAddToCart() {
         InventoryPage inventory = new InventoryPage(driver);
         inventory.addToCartByName("Sauce Labs Backpack");
@@ -87,7 +103,9 @@ public class InventoryTest extends BaseTest {
         Assert.assertEquals(inventory.getCartItemCount(), 2, "Mismatch in product count");
     }
 
-    @Test(description = "Verify product navigation works properly")
+    @Test
+    @Description("Verify product navigation works properly")
+    @Severity(SeverityLevel.CRITICAL)
     public void verifyProductNavigation() {
         InventoryPage inventory = new InventoryPage(driver);
         inventory.navigateToProduct("Sauce Labs Backpack");

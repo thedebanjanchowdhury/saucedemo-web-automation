@@ -1,6 +1,9 @@
 package tests;
 
 import base.BaseTest;
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -29,7 +32,9 @@ public class CartTests extends BaseTest {
         wait.until(ExpectedConditions.urlContains("inventory"));
     }
 
-    @Test(description = "Verify successful page load")
+    @Test
+    @Description("Verify successful page load")
+    @Severity(SeverityLevel.CRITICAL)
     public void verifySuccessfulPageLoad(){
         InventoryPage inventory = new InventoryPage(driver);
         inventory.resetAppState();
@@ -38,8 +43,9 @@ public class CartTests extends BaseTest {
         Assert.assertTrue(cartPage.isPageLoaded(), "Cart page is not loaded");
     }
 
-    @Test(description = "Verify add multiple items",
-    dataProvider = "productNames")
+    @Test(dataProvider = "productNames")
+    @Description("Verify add multiple items")
+    @Severity(SeverityLevel.CRITICAL)
     public void verifyAddMultipleItems(String productName) {
         InventoryPage inventory = new InventoryPage(driver);
         inventory.resetAppState();
@@ -48,7 +54,10 @@ public class CartTests extends BaseTest {
         Assert.assertTrue(cartPage.isProductPresent(productName),"Product not found: " +productName);
     }
 
-    @Test(description = "Verify remove items")
+
+    @Test
+    @Description("Verify remove items")
+    @Severity(SeverityLevel.CRITICAL)
     public void verifyRemoveItem() {
         InventoryPage inventory = new InventoryPage(driver);
         inventory.resetAppState();
@@ -58,8 +67,9 @@ public class CartTests extends BaseTest {
         Assert.assertFalse(cartPage.isProductPresent("Sauce Labs Backpack"), "Product found: " + "Sauce Labs Backpack");
     }
 
-    @Test(description = "Verify remove items",
-    dataProvider = "productNames")
+    @Test(dataProvider = "productNames")
+    @Description("Verify remove multiple items")
+    @Severity(SeverityLevel.CRITICAL)
     public void verifyRemoveItems(String productName) {
         InventoryPage inventory = new InventoryPage(driver);
         inventory.resetAppState();
@@ -69,7 +79,9 @@ public class CartTests extends BaseTest {
         Assert.assertFalse(cartPage.isProductPresent(productName), "Product found: " + productName);
     }
 
-    @Test(description = "Verify checkout navigation")
+    @Test
+    @Description("Verify checkout navigation")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyCheckoutNavigation() {
         InventoryPage inventory = new InventoryPage(driver);
         inventory.resetAppState();

@@ -53,6 +53,7 @@
                     <include name="verifyCorrectTaxAmountCalculations" />
                     <include name="verifyCartSubtotalCalculations" />
                     <include name="verifyCartTotalCalculations" />
+                    <include name="verifyDirectUrlAccess" />
                 </methods>
             </class>
         </classes>

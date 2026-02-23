@@ -5,7 +5,6 @@ import org.testng.annotations.*;
 import utils.ConfigReader;
 
 import java.time.Duration;
-import java.util.logging.LogManager;
 
 public class BaseTest {
 

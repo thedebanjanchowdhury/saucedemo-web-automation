@@ -1,6 +1,9 @@
 package tests;
 
 import base.BaseTest;
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -9,6 +12,8 @@ import pages.LoginPage;
 public class LoginTest extends BaseTest {
 
     @Test(dataProvider = "userCredentials")
+    @Description("Verify User Login")
+    @Severity(SeverityLevel.CRITICAL)
     public void verifyLoginTest(String username, String password, String expectedResult) {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(username, password);
@@ -21,6 +26,8 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(dataProvider = "negativeTestCases")
+    @Description("Verify negative login inputs")
+    @Severity(SeverityLevel.CRITICAL)
     public void verifyNegativeTestCases(String username, String password, String condition) {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(username, password);
@@ -43,6 +50,8 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(dataProvider = "validationTestCases")
+    @Description("Verify validation input edge cases")
+    @Severity(SeverityLevel.CRITICAL)
     public void verifyValidationTestCases(String username, String password) {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(username, password);
@@ -50,6 +59,8 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @Description("Verify error dialog close")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyErrorDialogClose() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login("admin", "admin");
@@ -60,6 +71,8 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @Description("Verify direct url access(first)")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyDirectURLAccess() {
         LoginPage loginPage = new LoginPage(driver);
         driver.get("https://saucedemo.com/inventory.html");
@@ -69,6 +82,8 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @Description("Verfiy direct url access(second)")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyDirectURLAccess2() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login("standard_user", "secret_sauce");

@@ -1,7 +1,10 @@
 package tests;
 
 import base.BaseTest;
-import org.openqa.selenium.WebElement;
+import io.qameta.allure.Description;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -35,14 +38,20 @@ public class CheckoutTwoTest extends BaseTest {
         checkoutOnePage.submitForm("Debanjan", "Chowdhury", "700001");
     }
 
-    @Test(description = "Verify page load", groups = {"requiresLogin"})
+    @Test(groups = {"requiresLogin"})
+    @Description("Verify page load")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Debanjan Chowdhury")
     public void verifyPageLoad() {
         CheckoutTwoPage checkoutTwoPage = new CheckoutTwoPage(driver);
         Assert.assertTrue(checkoutTwoPage.isPageLoaded(),
                 "Page not loaded");
     }
 
-    @Test(description = "Verify correct products in cart", groups = {"requiresLogin"})
+    @Test(groups = {"requiresLogin"})
+    @Description("Verify correct products in cart")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Debanjan Chowdhury")
     public void verifyCorrectProductsInCart() {
         CheckoutTwoPage checkoutTwoPage = new CheckoutTwoPage(driver);
         List<String> productNames = checkoutTwoPage.getProductNames();
@@ -50,7 +59,10 @@ public class CheckoutTwoTest extends BaseTest {
                 "Mismatch in product names");
     }
 
-    @Test(description = "Verify correct tax amount calculation", groups = {"requiresLogin"})
+    @Test(groups = {"requiresLogin"})
+    @Description("Verify correct tax amount calculation")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Debanjan Chowdhury")
     public void verifyCorrectTaxAmountCalculations() {
         CheckoutTwoPage checkoutTwoPage = new CheckoutTwoPage(driver);
         List<Double> productPrices = checkoutTwoPage.getProductPrices();
@@ -62,7 +74,10 @@ public class CheckoutTwoTest extends BaseTest {
         Assert.assertEquals(checkoutTwoPage.getTaxPrice(), roundedTax, "Tax price mismatch");
     }
 
-    @Test(description = "Verify correct cart subtotal calculation", groups = {"requiresLogin"})
+    @Test(groups = {"requiresLogin"})
+    @Description("Verify correct cart subtotal calculation")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Debanjan Chowdhury")
     public void verifyCartSubtotalCalculations() {
         CheckoutTwoPage checkoutTwoPage = new CheckoutTwoPage(driver);
         List<Double> productPrice = checkoutTwoPage.getProductPrices();
@@ -70,7 +85,10 @@ public class CheckoutTwoTest extends BaseTest {
         Assert.assertEquals(checkoutTwoPage.getSubtotalPrice(), totalPrice, "Subtotal price mismatch");
     }
 
-    @Test(description = "Verify correct cart total calculation", groups = {"requiresLogin"})
+    @Test(groups = {"requiresLogin"})
+    @Description("Verify correct cart total calculation")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Debanjan Chowdhury")
     public void verifyCartTotalCalculations() {
         CheckoutTwoPage checkoutTwoPage = new CheckoutTwoPage(driver);
         List<Double> productPrice = checkoutTwoPage.getProductPrices();
@@ -83,9 +101,12 @@ public class CheckoutTwoTest extends BaseTest {
         Assert.assertEquals(totalAmount, checkoutTwoPage.getTotalPrice(), "Total amount mismatch");
     }
 
-    @Test(description = "Verify prevention of direct url access")
+    @Test
+    @Description("Verify prevention of direct url access")
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("Debanjan Chowdhury")
     public void verifyDirectUrlAccess() {
         driver.get(CHECKOUT_TWO_PAGE_URL);
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/", "Current URL mismatch");
     }
-
 }

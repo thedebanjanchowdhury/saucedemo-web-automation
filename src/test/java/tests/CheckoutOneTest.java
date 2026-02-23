@@ -1,6 +1,9 @@
 package tests;
 
 import base.BaseTest;
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -26,14 +29,17 @@ public class CheckoutOneTest extends BaseTest {
         driver.navigate().to("https://www.saucedemo.com/checkout-step-one.html");
     }
 
-    @Test(description = "Verify page loaded successfully")
+    @Test
+    @Description("Verify page loaded successfully")
+    @Severity(SeverityLevel.CRITICAL)
     public void verifyPageLoad() {
         CheckoutOnePage checkoutOnePage = new CheckoutOnePage(driver);
         Assert.assertTrue(checkoutOnePage.isPageLoaded(), "Checkout page is not loaded");
     }
 
-    @Test(description = "Verify form check validation",
-            dataProvider = "formDataProvider")
+    @Test(dataProvider = "formDataProvider")
+    @Description("Verify form check validation")
+    @Severity(SeverityLevel.CRITICAL)
     public void verifyFormValidation(String firstName, String lastName, String zip, String type) {
         CheckoutOnePage checkoutOnePage = new CheckoutOnePage(driver);
         checkoutOnePage.submitForm(firstName, lastName, zip);
@@ -57,7 +63,9 @@ public class CheckoutOneTest extends BaseTest {
         }
     }
 
-    @Test(description = "Verify error dialog close")
+    @Test
+    @Description("Verify error dialog close")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyErrorDialogClose() {
         CheckoutOnePage checkoutOnePage = new CheckoutOnePage(driver);
         checkoutOnePage.submitForm("firstName", "lastName", "");
@@ -65,7 +73,9 @@ public class CheckoutOneTest extends BaseTest {
         Assert.assertTrue(checkoutOnePage.isErrorDialogClosed(), "Error dialog not closed");
     }
 
-    @Test(description = "Verify cancel checkout navigation")
+    @Test
+    @Description("Verify cancel checkout navigation")
+    @Severity(SeverityLevel.CRITICAL)
     public void verifyCancelCheckoutNavigation() {
         CheckoutOnePage checkoutOnePage = new CheckoutOnePage(driver);
         checkoutOnePage.cancelCheckout();
@@ -73,7 +83,9 @@ public class CheckoutOneTest extends BaseTest {
                 "Malfunction in cancel redirection");
     }
 
-    @Test(description = "Verify proceed checkout navigation")
+    @Test
+    @Description("Verify proceed checkout navigation")
+    @Severity(SeverityLevel.CRITICAL)
     public void verifyProceedCheckoutNavigation() {
         CheckoutOnePage checkoutOnePage = new CheckoutOnePage(driver);
         checkoutOnePage.submitForm("firstName", "lastName", "zip");
