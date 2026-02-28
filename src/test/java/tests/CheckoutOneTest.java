@@ -30,7 +30,7 @@ public class CheckoutOneTest extends BaseTest {
         driver.navigate().to("https://www.saucedemo.com/checkout-step-one.html");
     }
 
-    @Test
+    @Test(groups = {"smokeTests", "regressionTests"})
     @Description("Verify page loaded successfully")
     @Severity(SeverityLevel.CRITICAL)
     public void verifyPageLoad() {
@@ -38,7 +38,7 @@ public class CheckoutOneTest extends BaseTest {
         Assert.assertTrue(checkoutOnePage.isPageLoaded(), "Checkout page is not loaded");
     }
 
-    @Test(dataProvider = "formDataProvider")
+    @Test(dataProvider = "formDataProvider", groups = {"regressionTests"})
     @Description("Verify form check validation")
     @Severity(SeverityLevel.CRITICAL)
     public void verifyFormValidation(String firstName, String lastName, String zip, String type) {
@@ -64,7 +64,7 @@ public class CheckoutOneTest extends BaseTest {
         }
     }
 
-    @Test
+    @Test(groups = {"regressionTests"})
     @Description("Verify error dialog close")
     @Severity(SeverityLevel.NORMAL)
     public void verifyErrorDialogClose() {
@@ -74,7 +74,7 @@ public class CheckoutOneTest extends BaseTest {
         Assert.assertTrue(checkoutOnePage.isErrorDialogClosed(), "Error dialog not closed");
     }
 
-    @Test
+    @Test(groups = {"smokeTests", "regressionTests"})
     @Description("Verify cancel checkout navigation")
     @Severity(SeverityLevel.CRITICAL)
     public void verifyCancelCheckoutNavigation() {
@@ -84,7 +84,7 @@ public class CheckoutOneTest extends BaseTest {
                 "Malfunction in cancel redirection");
     }
 
-    @Test
+    @Test(groups = {"regressionTests", "smokeTests"})
     @Description("Verify proceed checkout navigation")
     @Severity(SeverityLevel.CRITICAL)
     public void verifyProceedCheckoutNavigation() {

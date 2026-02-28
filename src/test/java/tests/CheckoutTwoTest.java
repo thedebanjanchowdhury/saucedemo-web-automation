@@ -39,7 +39,7 @@ public class CheckoutTwoTest extends BaseTest {
         checkoutOnePage.submitForm("Debanjan", "Chowdhury", "700001");
     }
 
-    @Test(groups = {"requiresLogin"})
+    @Test(groups = {"requiresLogin", "smokeTests", "regressionTests"})
     @Description("Verify page load")
     @Severity(SeverityLevel.CRITICAL)
     @Owner("Debanjan Chowdhury")
@@ -49,7 +49,7 @@ public class CheckoutTwoTest extends BaseTest {
                 "Page not loaded");
     }
 
-    @Test(groups = {"requiresLogin"})
+    @Test(groups = {"requiresLogin", "regressionTests"})
     @Description("Verify correct products in cart")
     @Severity(SeverityLevel.CRITICAL)
     @Owner("Debanjan Chowdhury")
@@ -60,7 +60,7 @@ public class CheckoutTwoTest extends BaseTest {
                 "Mismatch in product names");
     }
 
-    @Test(groups = {"requiresLogin"})
+    @Test(groups = {"requiresLogin", "regressionTests"})
     @Description("Verify correct tax amount calculation")
     @Severity(SeverityLevel.CRITICAL)
     @Owner("Debanjan Chowdhury")
@@ -75,7 +75,7 @@ public class CheckoutTwoTest extends BaseTest {
         Assert.assertEquals(checkoutTwoPage.getTaxPrice(), roundedTax, "Tax price mismatch");
     }
 
-    @Test(groups = {"requiresLogin"})
+    @Test(groups = {"requiresLogin", "regressionTests"})
     @Description("Verify correct cart subtotal calculation")
     @Severity(SeverityLevel.CRITICAL)
     @Owner("Debanjan Chowdhury")
@@ -86,7 +86,7 @@ public class CheckoutTwoTest extends BaseTest {
         Assert.assertEquals(checkoutTwoPage.getSubtotalPrice(), totalPrice, "Subtotal price mismatch");
     }
 
-    @Test(groups = {"requiresLogin"})
+    @Test(groups = {"requiresLogin", "regressionTests"})
     @Description("Verify correct cart total calculation")
     @Severity(SeverityLevel.CRITICAL)
     @Owner("Debanjan Chowdhury")
@@ -102,7 +102,7 @@ public class CheckoutTwoTest extends BaseTest {
         Assert.assertEquals(totalAmount, checkoutTwoPage.getTotalPrice(), "Total amount mismatch");
     }
 
-    @Test
+    @Test(groups = {"smokeTests", "regressionTests"})
     @Description("Verify prevention of direct url access")
     @Severity(SeverityLevel.CRITICAL)
     @Owner("Debanjan Chowdhury")

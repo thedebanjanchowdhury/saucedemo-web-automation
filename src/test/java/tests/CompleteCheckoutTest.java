@@ -35,7 +35,7 @@ public class CompleteCheckoutTest extends BaseTest {
         checkoutTwoPage.proceedToCheckout();
     }
 
-    @Test
+    @Test(groups = {"smokeTests", "regressionTests"})
     @Description("Verify page load")
     @Severity(SeverityLevel.BLOCKER)
     public void verifyPageLoad() {
@@ -44,7 +44,7 @@ public class CompleteCheckoutTest extends BaseTest {
                 "Checkout page is not loaded");
     }
 
-    @Test
+    @Test(groups = {"smokeTests", "regressionTests"})
     @Description("Verify homepage redirection")
     @Severity(SeverityLevel.NORMAL)
     public void verifyHomePageRedirection() {
