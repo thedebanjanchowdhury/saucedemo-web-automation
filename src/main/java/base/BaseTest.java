@@ -10,12 +10,11 @@ public class BaseTest {
 
     protected WebDriver driver;
 
-    @Parameters("browser")
-    @BeforeClass
+    @BeforeMethod(alwaysRun = true)
     public void setup() {
         String browser = ConfigReader.getProperty("browser");
         String url = ConfigReader.getProperty("url");
-        long implicitWaitTime = Long.parseLong(ConfigReader.getProperty("implicit.wait"));
+//        long implicitWaitTime = Long.parseLong(ConfigReader.getProperty("implicit.wait"));
 
         driver = DriverFactory.getDriver(browser, true);
 
@@ -26,13 +25,14 @@ public class BaseTest {
 
     @AfterMethod
     public void resetApp() {
-        String url = ConfigReader.getProperty("url");
-        driver.manage().deleteAllCookies();
-        driver.get(url);
-    }
-
-    @AfterClass
-    public void tearDown() {
+//        String url = ConfigReader.getProperty("url");
+//        driver.manage().deleteAllCookies();
+//        driver.get(url);
         DriverFactory.quitDriver();
     }
+
+//    @AfterClass(alwaysRun = true)
+//    public void tearDown() {
+//        DriverFactory.quitDriver();
+//    }
 }

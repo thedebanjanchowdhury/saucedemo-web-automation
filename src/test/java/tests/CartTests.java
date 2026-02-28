@@ -22,17 +22,18 @@ public class CartTests extends BaseTest {
 
     @BeforeClass
     public void beforeClass(){
-        loginPage = new LoginPage(driver);
+
     }
 
     @BeforeMethod
     public void beforeMethod(){
+        loginPage = new LoginPage(driver);
         loginPage.login("standard_user", "secret_sauce");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.urlContains("inventory"));
     }
 
-    @Test
+    @Test(groups = {"smokeTests", "regressionTests"})
     @Description("Verify successful page load")
     @Severity(SeverityLevel.CRITICAL)
     public void verifySuccessfulPageLoad(){
@@ -43,7 +44,7 @@ public class CartTests extends BaseTest {
         Assert.assertTrue(cartPage.isPageLoaded(), "Cart page is not loaded");
     }
 
-    @Test(dataProvider = "productNames")
+    @Test(groups = {"regressionTests"}, dataProvider = "productNames")
     @Description("Verify add multiple items")
     @Severity(SeverityLevel.CRITICAL)
     public void verifyAddMultipleItems(String productName) {
@@ -55,7 +56,7 @@ public class CartTests extends BaseTest {
     }
 
 
-    @Test
+    @Test(groups = {"regressionTests"})
     @Description("Verify remove items")
     @Severity(SeverityLevel.CRITICAL)
     public void verifyRemoveItem() {
@@ -67,7 +68,7 @@ public class CartTests extends BaseTest {
         Assert.assertFalse(cartPage.isProductPresent("Sauce Labs Backpack"), "Product found: " + "Sauce Labs Backpack");
     }
 
-    @Test(dataProvider = "productNames")
+    @Test(groups = {"regressionTests"}, dataProvider = "productNames")
     @Description("Verify remove multiple items")
     @Severity(SeverityLevel.CRITICAL)
     public void verifyRemoveItems(String productName) {
@@ -79,7 +80,7 @@ public class CartTests extends BaseTest {
         Assert.assertFalse(cartPage.isProductPresent(productName), "Product found: " + productName);
     }
 
-    @Test
+    @Test(groups = {"regressionTests", "smokeTests"})
     @Description("Verify checkout navigation")
     @Severity(SeverityLevel.NORMAL)
     public void verifyCheckoutNavigation() {

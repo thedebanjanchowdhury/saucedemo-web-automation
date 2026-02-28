@@ -26,6 +26,7 @@ public class CheckoutTwoPage {
     private static final By subtotalPrice = By.className("summary_subtotal_label");
     private static final By taxPrice = By.className("summary_tax_label");
     private static final By totalPrice = By.className("summary_total_label");
+    private static final By finishButton = By.id("finish");
 
 
 
@@ -73,5 +74,9 @@ public class CheckoutTwoPage {
 
     public String getLabelPrice() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(productPrice)).getText();
+    }
+
+    public void proceedToCheckout() {
+        wait.until(ExpectedConditions.elementToBeClickable(finishButton)).click();
     }
 }

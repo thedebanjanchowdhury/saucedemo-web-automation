@@ -16,13 +16,14 @@ import pages.LoginPage;
 public class CheckoutOneTest extends BaseTest {
     LoginPage loginPage;
 
-    @BeforeClass
-    public void beforeClass() {
-        loginPage = new LoginPage(driver);
-    }
+//    @BeforeClass
+//    public void beforeClass() {
+//
+//    }
 
     @BeforeMethod
     public void beforeMethod() {
+        loginPage = new LoginPage(driver);
         loginPage.login("standard_user", "secret_sauce");
         InventoryPage inventory = new InventoryPage(driver);
         inventory.addToCartByName("Sauce Labs Backpack");

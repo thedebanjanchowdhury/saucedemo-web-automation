@@ -11,7 +11,7 @@ import pages.LoginPage;
 
 public class LoginTest extends BaseTest {
 
-    @Test(dataProvider = "userCredentials")
+    @Test(groups = {"regressionTests"}, dataProvider = "userCredentials")
     @Description("Verify User Login")
     @Severity(SeverityLevel.CRITICAL)
     public void verifyLoginTest(String username, String password, String expectedResult) {
@@ -25,7 +25,16 @@ public class LoginTest extends BaseTest {
         }
     }
 
-    @Test(dataProvider = "negativeTestCases")
+    @Test(groups = {"smokeTests", "regressionTests"})
+    @Description("Verify smoke user login")
+    @Severity(SeverityLevel.CRITICAL)
+    public void verifySmokeUserLogin() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("standard_user", "secret_sauce");
+        Assert.assertTrue(loginPage.isOnInventoryPage(), "Malfunction in login redirection");
+    }
+
+    @Test(groups = {"regressionTests"},dataProvider = "negativeTestCases")
     @Description("Verify negative login inputs")
     @Severity(SeverityLevel.CRITICAL)
     public void verifyNegativeTestCases(String username, String password, String condition) {
@@ -49,7 +58,7 @@ public class LoginTest extends BaseTest {
         }
     }
 
-    @Test(dataProvider = "validationTestCases")
+    @Test(groups = {"regressionTests"}, dataProvider = "validationTestCases")
     @Description("Verify validation input edge cases")
     @Severity(SeverityLevel.CRITICAL)
     public void verifyValidationTestCases(String username, String password) {
@@ -58,9 +67,9 @@ public class LoginTest extends BaseTest {
         Assert.assertTrue(loginPage.isErrorDisplayed(), "Error message not displayed");
     }
 
-    @Test
+    @Test(groups = {"regressionTests"})
     @Description("Verify error dialog close")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.MINOR)
     public void verifyErrorDialogClose() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login("admin", "admin");
@@ -70,7 +79,7 @@ public class LoginTest extends BaseTest {
         Assert.assertTrue(loginPage.isErrorDisplayed(), "Error message displayed after close");
     }
 
-    @Test
+    @Test(groups = {"regressionTests"})
     @Description("Verify direct url access(first)")
     @Severity(SeverityLevel.NORMAL)
     public void verifyDirectURLAccess() {
@@ -81,8 +90,8 @@ public class LoginTest extends BaseTest {
         Assert.assertTrue(loginPage.isLoginButtonDisplayed(), "Login button not displayed");
     }
 
-    @Test
-    @Description("Verfiy direct url access(second)")
+    @Test(groups = {"regressionTests"})
+    @Description("Verify direct url access(second)")
     @Severity(SeverityLevel.NORMAL)
     public void verifyDirectURLAccess2() {
         LoginPage loginPage = new LoginPage(driver);
@@ -126,5 +135,4 @@ public class LoginTest extends BaseTest {
                 {"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ExtraValidationTestStringForLengthCheck", "secret_sauce"}
         };
     }
-
 }

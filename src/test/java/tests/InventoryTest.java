@@ -19,17 +19,13 @@ public class InventoryTest extends BaseTest {
 
     LoginPage loginPage;
 
-    @BeforeClass
-    public void loginSetup() {
-        loginPage = new LoginPage(driver);
-    }
-
     @BeforeMethod
     public void beforeMethod() {
+        loginPage = new LoginPage(driver);
         loginPage.login("standard_user", "secret_sauce");
     }
 
-    @Test
+    @Test(groups = {"smokeTests", "regressionTests"})
     @Description("Verify page loads successfully")
     @Severity(SeverityLevel.CRITICAL)
     public void verifyPageLoaded() {
@@ -38,7 +34,7 @@ public class InventoryTest extends BaseTest {
     }
 
 
-    @Test
+    @Test(groups = {"regressionTests"})
     @Description("Verify ascending sort of product names")
     @Severity(SeverityLevel.NORMAL)
     public void verifyAscendingSort() {
@@ -52,7 +48,7 @@ public class InventoryTest extends BaseTest {
         Assert.assertEquals(sortedList, actialList, "Mismatch in ascending sort function");
     }
 
-    @Test
+    @Test(groups = {"regressionTests"})
     @Description("Verify descending sort of product names")
     @Severity(SeverityLevel.NORMAL)
     public void verifyDescendingSort() {
@@ -67,7 +63,7 @@ public class InventoryTest extends BaseTest {
         Assert.assertEquals(sortedList, actialList, "Mismatch in descending sort function");
     }
 
-    @Test
+    @Test(groups = {"regressionTests"})
     @Description("Verify ascending sort of product price")
     @Severity(SeverityLevel.NORMAL)
     public void verifyPriceAscendingSort() {
@@ -79,7 +75,7 @@ public class InventoryTest extends BaseTest {
         Assert.assertEquals(sortedList, actialList, "Mismatch in ascending price sort function");
     }
 
-    @Test
+    @Test(groups = {"regressionTests"})
     @Description("Verify descending sort of product price")
     @Severity(SeverityLevel.NORMAL)
     public void verifyPriceDescendingSort() {
@@ -92,7 +88,7 @@ public class InventoryTest extends BaseTest {
         Assert.assertEquals(actualList, sortedList, "Mismatch in descending price sort function");
     }
 
-    @Test
+    @Test(groups = {"regressionTests"})
     @Description("Verify product add to cart")
     @Severity(SeverityLevel.CRITICAL)
     public void verifyProductAddToCart() {
@@ -103,7 +99,7 @@ public class InventoryTest extends BaseTest {
         Assert.assertEquals(inventory.getCartItemCount(), 2, "Mismatch in product count");
     }
 
-    @Test
+    @Test(groups = {"regressionTests", "smokeTests"})
     @Description("Verify product navigation works properly")
     @Severity(SeverityLevel.CRITICAL)
     public void verifyProductNavigation() {

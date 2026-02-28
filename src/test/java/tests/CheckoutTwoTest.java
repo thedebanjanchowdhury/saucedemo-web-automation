@@ -22,13 +22,14 @@ public class CheckoutTwoTest extends BaseTest {
     String CHECKOUT_TWO_PAGE_URL = "https://www.saucedemo.com/checkout-step-two.html";
     double taxRate = 0.08;
 
-    @BeforeClass
-    public void beforeClass() {
-        loginPage = new LoginPage(driver);
-    }
+//    @BeforeClass
+//    public void beforeClass() {
+//
+//    }
 
     @BeforeMethod(onlyForGroups = {"requiresLogin"})
     public void beforeMethod() {
+        loginPage = new LoginPage(driver);
         loginPage.login("standard_user", "secret_sauce");
         InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.addToCartByName(FIRST_PRODUCT_NAME);
